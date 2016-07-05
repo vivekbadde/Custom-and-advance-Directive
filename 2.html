@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script><!-- Installation jquery IS requred -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+	<title>2</title>
+<script type="text/javascript">
+		var mod=angular.module("myapp",[]);
+		mod.controller("mycon",function($scope){
+			$scope.func = function(){
+				alert('Button Clicked/ Custom Directive');
+			}
+		})
+
+		mod.directive("myDir",function(){  
+			return {
+				template : ' <button ng-click="action()"> Attribute </button> ',
+				restrict : 'A',
+				scope : { action:'&' }
+			}
+		});
+
+		mod.directive("myDir1",function(){  
+			return {
+				template : ' <button ng-click="action()"> Element </button>  ',
+				restrict : 'E',
+				scope : { action:'&' }
+			}
+		});
+		mod.directive("myDir2",function(){	
+			return {
+				template : '<button ng-click="action()">Class </button>',
+				restrict : 'C',
+				scope : { action:'&' }
+			}
+		});
+		
+		
+		mod.directive("myDir4",function(){  
+			return { 
+				template : '<p> Comment Directive Called </p>',
+				restrict : 'M',
+				replace : 'false',
+				scope : {  }
+			}
+		});
+		
+	</script>
+</head>
+<body ng-app="myapp">
+	<div ng-controller="mycon">
+		<div my-dir action="func()"> </div>
+		<my-dir1 action="func()"> </my-dir1> 
+		<div class="my-dir2" action="func()"> </div>
+		<!-- directive: my-dir4 -->
+	</div>
+
+</body>
+</html>

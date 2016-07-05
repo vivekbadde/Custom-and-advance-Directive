@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5</title>
+<meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script type="text/javascript">
+		var ang=angular.module("myapp",[]);
+		ang.controller("mycon",function($scope){
+			$scope.name= "";
+			$scope.age="";
+		})
+		ang.directive("myDir",function(){
+			return{
+				template : '<div class="panel-body"> Name : {{name}} <br> Age : {{age}} </div>',
+				restrict : 'A',
+				replace : 'false',
+				scope : '='
+			}
+		});
+	</script>
+</head>
+<body ng-app="myapp" >
+
+	<divng-controller="mycon">
+		<form>
+			<div class="form-group">
+			<label> Name :</label> <input type="text" ng-model="name">  </input> <br>
+			</div>
+			<div class="form-group">
+			<label> Age :</label> <input type="number" ng-model="age">  </input> <br>
+			</div>
+		</form>
+		<div my-dir> </div>
+	</div>
+
+</body>
+</html>

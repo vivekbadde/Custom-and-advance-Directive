@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>3</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script type="text/javascript">
+		var module = angular.module('app', []);
+		module.factory('myfac', function () {
+				
+				var employee_id = 1;
+				
+				
+				var contacts = [{
+					id: 1,
+					'name': '',
+					'age' : '',
+					'empid':'',
+					'salary' : ''
+				}];
+				
+				
+				contacts.save = function (contact) {
+					if (contact.id == null) {
+						
+						contact.id = employee_id++;
+						contacts.push(contact);
+					} else {
+						
+						for (i in contacts) {
+							if (contacts[i].id == contact.id) {
+								contacts[i] = contact;
+							}
+						}
+					}
+				}
+				
+				contacts.get = function (id) {
+					for (i in contacts) {
+						if (contacts[i].id == id) {
+							return contacts[i];
+						}
+					}
+				}
+				
+				
+				contacts.list = function () {
+					return contacts;
+				}
+				return contacts;
+			});
+		module.controller('ContactController', function ($scope, myfac) {
+			$scope.contacts = myfac.list();
+			$scope.saveContact = function () {
+				myfac.save($scope.newcontact);
+				$scope.newcontact = {};
+			}
+		})
+	</script>
+	
+</head>
+
+<body ng-app="app">
+	<div class="container" ng-controller="ContactController">
+		
+		<form>
+			<div class="form-group">
+			<label>Name</label>
+			<input type="text" name="name" required ng-model="newcontact.name" /> <br>
+			</div>
+			<div class="form-group">
+			<label>Age</label>
+			<input type="number" name="age" required ng-model="newcontact.age"  /> <br>
+			</div>
+			<div class="form-group">
+			<label>Employee Id</label>
+			<input type="text" name="empid" required ng-model="newcontact.empid" /> <br>
+			</div>
+			<div class="form-group">
+			<label>Salary</label>
+			<input type="number" name="salary" required ng-model="newcontact.salary" /> <br>
+			</div>
+			<input type="hidden" ng-model="newcontact.id" /> <br>
+			<input type="button" value="Save" ng-click="saveContact()" />
+		</form>
+		<!-- Table -->
+		<table class="table-bordered">
+			<thead>
+				<tr class="success">
+					<th>Name</th>
+					<th>Age</th>
+					<th>Emp Id</th>
+					<th>Salary</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="contact in contacts">
+					<td>{{contact.name}}</td>
+					<td>{{contact.age}}</td>
+					<td>{{contact.empid}}</td>
+					<td>{{contact.salary}}</td>
+				   
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

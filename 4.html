@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+	<title>4</title>
+
+<script type="text/javascript">
+    var mod=angular.module("myApps",[])
+    mod.controller("con",function($scope) {
+        $scope.name="";
+         $scope.age="";
+       
+    
+    })
+    
+ 
+
+  mod.directive("myIsolateScope",function(){
+			return{
+			
+				template : '<div> Name : {{ name }} Age: {{age}} </div>',
+					scope:{}
+
+		
+			}
+		});
+ </script>
+</head>
+<body ng-app="myApps" ng-controller="con">
+<h1>Isolated Scope:</h1>
+	<div>
+		Name : <input type="text"ng-model="name"> </input>
+		Age : <input type="number"ng-model="age"> </input>
+		
+	</div>
+<div my-isolate-scope></div>
+</body>
+</html>
